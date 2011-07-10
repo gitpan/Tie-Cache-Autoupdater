@@ -10,7 +10,7 @@ BEGIN {
     Time::HiRes->import('time') unless $@;
 }
 
-our $VERSION = 0.2;
+our $VERSION = 0.21;
 
 sub TIEHASH {
     my $class       = shift;
@@ -88,7 +88,7 @@ sub _fetch {
         $self->{$k}{last} = time();
     }
     
-    return $self->{$k}{clone}
+    return $self->{$k}{clone} && ref $self->{$k}{result}
         ? dclone($self->{$k}{result})
         : $self->{$k}{result};
 }
@@ -99,11 +99,11 @@ __END__
 
 =head1 NAME
 
-Tie::Cache::Autoupdater - cache that automatically updated 
+Tie::Cache::Autoupdater - Cache that automatically updated 
 
 =head1 VERSION
 
-This documentation refers to <Tie::Cache::Autoupdater> version 0.2
+This documentation refers to <Tie::Cache::Autoupdater> version 0.21
 
 =head1 AUTHOR
 
